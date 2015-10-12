@@ -8,7 +8,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name='base.html')),
+    url(r'^$', include('products.urls', namespace='products')),
 
     # Examples:
     # url(r'^$', 'shop.views.home', name='home'),

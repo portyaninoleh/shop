@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}
+    {% trans 'Список продуктов' %}
+{% endblock page_title %}
+
+{% block content %}
+    <table class="table table-striped">
+        {% for object in object_list %}
+            <tr><td>{{ object }}</td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
