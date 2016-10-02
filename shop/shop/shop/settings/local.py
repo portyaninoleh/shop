@@ -60,5 +60,5 @@ MIDDLEWARE_CLASSES += (
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
-INTERNAL_IPS = ('0.0.0.0',)
+INTERNAL_IPS = ('0.0.0.0', '10.0.2.2')
 ########## END TOOLBAR CONFIGURATION

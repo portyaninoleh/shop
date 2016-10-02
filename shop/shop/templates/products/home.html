@@ -1,0 +1,252 @@
+{% extends 'sceleton.html' %}
+
+{% load i18n %}
+
+{% block content %}
+<section>
+    <!-- *** HOMEPAGE CAROUSEL ***
+_________________________________________________________ -->
+
+    <div class="home-carousel">
+
+        <div class="dark-mask"></div>
+
+        <div class="container">
+            <div class="homepage owl-carousel">
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-5 right">
+                            <p>
+                                <img src="{{ STATIC_URL }}img/logo.png" alt="">
+                            </p>
+                            <h1>{% trans 'Smoking anywhere' %}</h1>
+                            <p>{% trans 'without harm to you and others' %} </p>
+                        </div>
+                        <div class="col-sm-7">
+                            <img class="img-responsive" src="{{ STATIC_URL }}img/eCigarette-1.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+
+                        <div class="col-sm-7 text-center">
+                            <img class="img-responsive" src="{{ STATIC_URL }}img/eCigarette2.png" alt="">
+                        </div>
+
+                        <div class="col-sm-5">
+                            <h2>{% trans 'Smoking eCigarette is much cheaper' %} </h2>
+                            <p>{% trans 'for your health and purse' %} </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-5 right">
+                            <h1>{% trans 'Start the new life' %}</h1>
+                            <p>{% trans 'without the bad smell of tobacco products' %} </p>
+                        </div>
+                        <div class="col-sm-7">
+                            <img class="img-responsive" src="{{ STATIC_URL }}img/template-easy-customize.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <img class="img-responsive" src="{{ STATIC_URL }}img/template-easy-code.png" alt="">
+                        </div>
+                        <div class="col-sm-5">
+                            <h1>{% trans 'eCigarette has a lot of advantages' %} </h1>
+                            <p>{% trans 'eCigarette does not contain carcinogens, helps to painless quit smoking, There is no passing smoking effect, Increases the sense of smell and taste' %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.project owl-slider -->
+        </div>
+    </div>
+
+    <!-- *** HOMEPAGE CAROUSEL END *** -->
+</section>
+
+<section class="bar background-white soon-in-sale">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h1>{% trans 'Coming soon' %} </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="box-simple">
+                        <img class="soon-in-sale" src="{{ STATIC_URL }}img/main/ugo-t.jpg" alt="">
+                        <h3>UGO-T + Aspire CE5</h3>
+                        <p>
+                            {% blocktrans %}High quality and low cost make this eCigarette the best choice of it's class.
+                            This model allows smoking and recharging simultaneously and it makes it's using super easy
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-simple">
+                        <img class="soon-in-sale" src="{{ STATIC_URL }}img/main/evod-aspire.jpg" alt="">
+                        <h3>EVOD VV USB + Aspire ET-S</h3>
+                        <p>
+                            {% blocktrans %}
+                                EVOD VV USB + Aspire ET-S - eCigarette, which has the following properties: passthrough,
+                                variable voltage and power and also it has 1100mAh buttery and it make it's using super easy wherever you need
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-simple">
+                        <img class="soon-in-sale" src="{{ STATIC_URL }}img/main/joyetech-ego-one-aio.jpg" alt="">
+                        <h3>Joyetech eGo AIO</h3>
+                        <p>
+                            {% blocktrans %}
+                                Joyetech eGo AIO has very convenient dressing on the top and is the first eCigarette, which has battery and clearomizer made integrally.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bar background-pentagon no-mb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading text-center">
+                    <h2>{% trans "Peoples' opinion about eCigarettes" %} </h2>
+                </div>
+
+                <!-- *** TESTIMONIALS CAROUSEL ***
+_________________________________________________________ -->
+
+                <ul class="owl-carousel testimonials same-height-row">
+                    <li class="item">
+                        <div class="testimonial same-height-always">
+                            <div class="text">
+                                <p>
+                                    {% blocktrans %}
+                                        eCigarette gives almost the same as the traditional smoking, but without 4000 poisons,
+                                        with which the smoker is provided by the usual cigarette
+                                    {% endblocktrans %}
+                                </p>
+                            </div>
+                            <div class="bottom">
+                                <div class="icon"><i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="name-picture">
+                                    <img class="" alt="" src="{{ STATIC_URL }}img/main/drChrisSteele.jpg">
+                                    <h5>{% trans 'Chris Steele' %}</h5>
+                                    <p>{% trans 'TV doctor for over 26 years' %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="testimonial same-height-always">
+                            <div class="text">
+                                <p>{% trans 'eCigarette...It is simple, safely and very effectively.' %}</p>
+                            </div>
+                            <div class="bottom">
+                                <div class="icon"><i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="name-picture">
+                                    <img class="" alt="" src="{{ STATIC_URL }}img/main/drIanBrooman.jpg">
+                                    <h5>{% trans 'Ian Brooman' %}</h5>
+                                    <p>{% trans 'English doctor, member of WHO' %} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="testimonial same-height-always">
+                            <div class="text">
+                                <p>
+                                    {% blocktrans %}
+                                        Such cigarettes minimize the impact on the body of harmful factors. According to the
+                                        technology, it is possible to expect that there is no stimulation of the lungs' and stomach cancer and
+                                        minimize the the impact on the people around as far as there is no carbon monoxide
+                                    {% endblocktrans %}
+                                </p>
+                            </div>
+                            <div class="bottom">
+                                <div class="icon"><i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="name-picture">
+                                    <img class="" alt="" src="{{ STATIC_URL }}img/no_avatar.png">
+                                    <h5>{% trans 'V. Mikhaiut' %}</h5>
+                                    <p>{% trans 'Dnepropetrovsk Drug Dep. Clinic' %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="testimonial same-height-always">
+                            <div class="text">
+                                <p>
+                                    {% blocktrans %}
+                                    People are going to do behaviors that are not necessarily good for them.
+                                        Let’s at least minimize the risk. That is going to save so many lives. If we had a preference,
+                                        we wouldn’t want young people to smoke or vape. The problem is we don’t live in an ideal world and
+                                        the reality is that young people are going to try and find some method of exercising their
+                                        independence and freedom, their rejection of autonomy and their rebelliousness. The question is
+                                        really what form that is going to take, not whether it’s going to happen
+                                    {% endblocktrans %}
+                                </p>
+                            </div>
+
+                            <div class="bottom">
+                                <div class="icon"><i class="fa fa-quote-left"></i>
+                                </div>
+                                <div class="name-picture">
+                                    <img class="" alt="" src="{{ STATIC_URL }}img/main/MichaelSiegel.jpg">
+                                    <h5>{% trans 'Michael Siegel' %}</h5>
+                                    <p>{% trans 'School of Public Health' %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- /.owl-carousel -->
+
+                <!-- *** TESTIMONIALS CAROUSEL END *** -->
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- /.bar -->
+
+<section class="bar background-image-fixed-2 no-mb color-white text-center">
+    <div class="dark-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="icon icon-lg"><i class="fa fa-file-code-o"></i>
+                </div>
+                <h3 class="text-uppercase">{% trans "Didn\'t find what you want?" %} </h3>
+                <p class="lead">{% trans 'Please, contact us and we will do our best to help you' %} </p>
+                <p class="text-center">
+                    <a href="#" class="btn btn-template-transparent-black btn-lg">
+                        {% trans 'Contact Us' %}
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

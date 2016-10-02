@@ -10,5 +10,5 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('products.views',
-    url(r'$', 'products_list', name='products'),
+    url(r'$', 'home', name='home'),
 )

@@ -1,0 +1,24 @@
+.right {
+    text-align: right;
+}
+.admin-table-id {
+    width: 30px;
+}
+img.soon-in-sale{
+    height: 150px;
+    width: 200px;
+}
+
+div#loading-target section.soon-in-sale{
+    padding: 0;
+}
+
+.nav-pills li.active > a {
+    color: white !important;
+    background-color: #5bc0de;
+}
+
+.nav-pills li.active > a > .badge{
+    color: #38a7bb;
+    background-color: white;
+}

@@ -139,6 +139,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'common.contextprocessor.extraContext'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -189,12 +190,17 @@ DJANGO_APPS = (
     # Admin panel and documentation:
     'django.contrib.admin',
     # 'django.contrib.admindocs',
-    'mptt'
+    'mptt',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'anymail',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'products',
+    'users'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -233,8 +239,47 @@ LOGGING = {
 }
 ########## END LOGGING CONFIGURATION
 
+########## AUTHENTICATION CONFIGURATION
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+########## END AUTHENTICATION CONFIGURATION
+
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 ########## END WSGI CONFIGURATION
+
+########## CUSTOM USER MODEL
+AUTH_USER_MODEL = "users.User"
+########## END CUSTOM USER MODEL
+
+########## ALLAUTH CONFIGURATION
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
+ACCOUNT_LOGOUT_REDIRECT_URL = "products:home"
+ACCOUNT_LOGOUT_ON_GET = True
+########## END ALLAUTH CONFIGURATION
+
+########## MAILGUN CONFIGURATION
+ANYMAIL = {
+    "MAILGUN_API_KEY": 'key-0dd5cb0271ea4b6d7472fe3813ac5635',
+    "MAILGUN_SENDER_DOMAIN": 'sandboxf51db783055940c885c58e76424d4ea3.mailgun.org',
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  # or sendgrid.SendGridBackend, or...
+DEFAULT_FROM_EMAIL = "support@esmoke.ua"
+
+########## CITIES-LIGHT CONFIGURATION
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['ua', 'en', 'ru']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['UA']
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG', 'PPLL', 'PPLR', 'PPLS', 'STLMT',]
+########## END CITIES-LIGHT CONFIGURATION
