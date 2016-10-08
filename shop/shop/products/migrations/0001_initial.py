@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 import mptt.fields
 
 
@@ -59,6 +59,20 @@ class Migration(migrations.Migration):
                 ('embed_code', models.CharField(default='', max_length=255, verbose_name='Embed Code')),
                 ('product', models.ForeignKey(to='products.Products')),
             ],
+        ),
+        migrations.CreateModel(
+            name='WareHouse',
+            fields=[
+                ('description', models.CharField(max_length=255, verbose_name='Description')),
+                ('phone', models.CharField(max_length=20, verbose_name='Phone')),
+                ('number', models.IntegerField(verbose_name='Number')),
+                ('site_key', models.IntegerField(serialize=False, verbose_name='Site key', primary_key=True)),
+                ('city', models.CharField(max_length=255, verbose_name='City')),
+            ],
+            options={
+                'verbose_name': 'WareHouse',
+                'verbose_name_plural': 'WareHouses',
+            },
         ),
         migrations.AddField(
             model_name='productimages',

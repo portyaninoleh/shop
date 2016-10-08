@@ -47,5 +47,16 @@ class ProductVideo(models.Model):
     product = models.ForeignKey(Products)
 
 
+class WareHouse(models.Model):
+    description = models.CharField(_('Description'), max_length=255)
+    phone = models.CharField(_('Phone'), max_length=20)
+    number = models.IntegerField(_('Number'))
+    site_key = models.IntegerField(_('Site key'), primary_key=True)
+    city = models.CharField(_('City'), max_length=255)
 
+    class Meta:
+        verbose_name = _('WareHouse')
+        verbose_name_plural = _('WareHouses')
 
+    def __unicode__(self):
+        return self.description

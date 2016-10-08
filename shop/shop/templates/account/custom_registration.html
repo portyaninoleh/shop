@@ -1,19 +1,11 @@
 {% extends 'sceleton.html' %}
 
-{% load i18n %}
+{% load i18n custom_tags %}
 
 {% block content %}
 
 <div id="content">
     <div class="container">
-
-{#        <c:if test="${not empty msg}">#}
-{#            <div class="row">#}
-{#                <div class="col-md-12">#}
-{#                    <div class="alert alert-info"><c:out value="${msg}"/></div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </c:if>#}
         <div class="row">
             <div class="col-md-6">
                 <div class="box">
@@ -23,86 +15,27 @@
                     <p>{% trans 'It will take not more then a few minutes and will give you the possibility to make super favorable orders!' %}</p>
                     <hr>
 
-                    <form action="{% url 'account_signup' %}" method="post">
-                        {{ registration_form }}
+                    <form action="{% url 'user:custom_signup' %}" method="post"
+                          data-get-warehouses-url="{% url 'user:get_warehouses' %}" id="registration-form">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                                {{ field|addcss:"form-control" }}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div id="warehouse-helper">
+                            <div class="alert alert-info">
+                                {% trans 'Please fill the city field to get available warehouses' %}
+                            </div>
+                        </div>
+                        <button class="btn btn-default">{% trans 'Register' %}</button>
                     </form>
-{#                    <form:form action="/registration" method="post" commandName="user">#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="firstName">#}
-{#                                <spring:message code="registrationFirstName"/>#}
-{#                            </form:label>#}
-{#                            <form:input path="firstName" cssClass="form-control"/>#}
-{#                            <form:errors path="firstName" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="lastName">#}
-{#                                <spring:message code="registrationLastName"/>#}
-{#                            </form:label>#}
-{#                            <form:input path="lastName" cssClass="form-control"/>#}
-{#                            <form:errors path="lastName" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="email">#}
-{#                                <spring:message code="registrationEmail"/>#}
-{#                            </form:label>#}
-{#                            <form:input path="email" cssClass="form-control"/>#}
-{#                            <form:errors path="email" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="phone">#}
-{#                                <spring:message code="registrationPhone"/>#}
-{#                            </form:label>#}
-{#                            <form:input path="phone" cssClass="form-control"/>#}
-{#                            <form:errors path="phone" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="password">#}
-{#                                <spring:message code="registrationPassword"/>#}
-{#                            </form:label>#}
-{#                            <form:password path="password" cssClass="form-control"/>#}
-{#                            <form:errors path="password" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="confirmPassword">#}
-{#                                <spring:message code="registrationConfirmPassword"/>#}
-{#                            </form:label>#}
-{#                            <form:password path="confirmPassword" cssClass="form-control"/>#}
-{#                            <form:errors path="confirmPassword" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <hr/>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="region">#}
-{#                                <spring:message code="registrationRegion"/>#}
-{#                            </form:label>#}
-{#                            <form:select path="region" cssClass="form-control">#}
-{#                                <c:forEach items="${regions}" var="region">#}
-{#                                    <form:option value="${region.id}"> ${region.name} </form:option>#}
-{#                                </c:forEach>#}
-{#                            </form:select>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="city">#}
-{#                                <spring:message code="registrationCity"/>#}
-{#                            </form:label>#}
-{#                            <form:input path="city" cssClass="form-control"/>#}
-{#                            <form:errors path="city" cssClass="error"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="deliveryAddresses">#}
-{#                                <spring:message code="registrationWareHouse"/>#}
-{#                            </form:label>#}
-{#                            <div id="warehouse-helper">#}
-{#                                <h5><spring:message code="registrationWareHouseHelpText"/> </h5>#}
-{#                            </div>#}
-{#                            <form:select path="deliveryAddresses" cssClass="form-control" disabled="true" />#}
-{#                        </div>#}
-{#                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>#}
-{#                        <div class="text-center">#}
-{#                            <button type="submit" class="btn btn-template-main">#}
-{#                                <i class="fa fa-user-md"></i> <spring:message code="registrationRegisterButton"/>#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </form:form>#}
                 </div>
             </div>
 
@@ -110,7 +43,7 @@
                 <div class="box">
                     <h2 class="text-uppercase">{% trans 'Login' %} </h2>
 
-                    <p class="lead">{% trans 'Already registration?' %} </p>
+                    <p class="lead">{% trans 'Already registered?' %} </p>
                     <p class="text-muted">
                         {% blocktrans %}
                             Please log in under your account ot be able to make super favorable orders
@@ -118,29 +51,29 @@
                     </p>
 
                     <hr>
-
-                    <form action="{% url 'account_signup' %}">
-                        {{ login_form }}
+                    {{ login_form.non_field_errors }}
+                    <form action="{% url 'account_login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ login_form.login.id_for_label }}">{% trans 'Email' %}</label>
+                            <input type="text" class="form-control" name="{{ login_form.login.name }}" id="{{ login_form.login.auto_id }}">
+                            {% for error in login_form.email.errors %}
+                                <div class="alert alert-danger">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ login_form.password.id_for_label }}">{% trans 'Password' %}</label>
+                            <input type="password" class="form-control" name="{{ login_form.password.name }}" id="{{ login_form.password.auto_id }}">
+                            {% for error in login_form.password.errors %}
+                                <div class="alert alert-danger">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="btn btn-default">{% trans 'Login' %}</button>
                     </form>
-
-{#                    <form:form commandName="loginForm" action="/login" method="post">#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="email"><spring:message code="registrationEmail"/> </form:label>#}
-{#                            <form:input path="email" cssClass="form-control"/>#}
-{#                            <form:errors path="email"/>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <form:label path="password"><spring:message code="registrationPassword"/> </form:label>#}
-{#                            <form:password path="password" cssClass="form-control"/>#}
-{#                            <form:errors path="password"/>#}
-{#                        </div>#}
-{#                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">#}
-{#                        <div class="text-center">#}
-{#                            <button type="submit" class="btn btn-template-main">#}
-{#                                <i class="fa fa-sign-in"></i> <spring:message code="loginButton"/>#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </form:form>#}
                 </div>
             </div>
 

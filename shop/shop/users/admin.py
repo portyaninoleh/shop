@@ -4,7 +4,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
-from users.models import User
+from users.models import (User,
+                          WareHouse)
 
 
 class CustomUserAdmin(UserAdmin):
@@ -32,4 +33,7 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
+
+
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(WareHouse)

@@ -415,7 +415,7 @@ $(window).resize(function () {
 
 // Filling DeliveryAddresses on the registration page
 $(function(){
-	var city = $("#city");
+	var city = $("#id_city");
 	if(city.length){
 		city.on("blur", function(){
 			fillDeliveryAddresses(city);
@@ -428,9 +428,9 @@ $(function(){
 
 function fillDeliveryAddresses(cityField){
 	var city = cityField.val();
-	var wareHouses = $("#deliveryAddresses");
+	var wareHouses = $("#id_warehouses");
 	var sendData = {};
-	var email = $("#city");
+	var email = $("#id_email");
 	if(!city.length){
 		$("#warehouse-helper").show();
 		wareHouses.find("option").remove();
@@ -442,7 +442,7 @@ function fillDeliveryAddresses(cityField){
 		sendData.email = email.val();
 	}
 	$.ajax({
-		url: "/getwarehouses",
+		url: $('#registration-form').attr('data-get-warehouses-url'),
 		type: "get",
 		dataType: "json",
 		data: sendData,
@@ -457,7 +457,7 @@ function fillDeliveryAddresses(cityField){
 					option = "<option></option>"
 				}
 				wareHouses.append($(option)
-					.attr("value", data[0][i].DescriptionRu)
+					.attr("value", data[0][i].SiteKey)
 					.text(data[0][i].DescriptionRu));
 				wareHouses.attr("disabled", false);
 				$("#warehouse-helper").hide();
@@ -468,65 +468,3 @@ function fillDeliveryAddresses(cityField){
 		}
 	});
 }
-
-// Resending activation email
-
-$(function () {
-    var emailInput = $("#id_email");
-    var successAlert = $("#success-alert");
-    if(emailInput.length){
-        $("#resend_activation_email").on("click", function(){
-            loadingTarget.loadingOverlay({
-                overlayClass: 'loading-overlay',
-                spinnerClass: 'loading-spinner'
-            });
-            $.ajax({
-                url: "/resend-activation-email",
-                type: "GET",
-                dataType: "text",
-                data: {
-                    email: emailInput.val()
-                },
-                success: function(data){
-                    loadingTarget.loadingOverlay("remove");
-                    successAlert.append(data);
-                    successAlert.removeClass("hidden");
-                },
-                error: function(data){
-                    loadingTarget.loadingOverlay("remove");
-                    alert(data);
-                }
-            })
-        });
-    }
-});
-
-$(function(){
-    var totalCheckbox = $("#checkbox-total");
-    if(totalCheckbox.length > 0){
-        totalCheckbox.on("change", function(){
-            $("table.table-hover>tbody>tr>td>input[type='checkbox']").prop("checked", totalCheckbox.prop("checked"));
-        });
-    }
-});
-
-$(function(){
-    var adminDeleteForm = $("#admin-delete-form");
-    if(adminDeleteForm.length > 0){
-        $("#admin-delete-button").on("click", function(){
-            if($("table.table-hover>tbody>tr>td>input[type='checkbox']:checked").length == 0){
-            	return;
-			}
-        	adminDeleteForm.submit();
-        });
-    }
-});
-
-$(function () {
-	var adminDeleteConfirmForm = $("#admin-delete-confirm");
-	if(adminDeleteConfirmForm.length > 0){
-		$("#admin-delete-confirm-button").on("click", function () {
-			adminDeleteConfirmForm.submit();
-		})
-	}
-});

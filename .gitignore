@@ -42,3 +42,4 @@ Desktop.ini
 .vagrant
 Vagrantfile
 local.py
+celerybeat-schedule

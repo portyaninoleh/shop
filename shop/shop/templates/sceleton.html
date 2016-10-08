@@ -97,7 +97,7 @@
                                             <i class="fa fa-sign-in"></i>
                                             <span class="hidden-xs text-uppercase">{% trans 'Login' %} </span>
                                         </a>
-                                        <a href="{% url 'account_signup' %}">
+                                        <a href="{% url 'user:registration_login' %}">
                                             <i class="fa fa-user"></i>
                                             <span class="hidden-xs text-uppercase">{% trans 'registration' %} </span>
                                         </a>
@@ -218,6 +218,12 @@
                     <!-- /#navbar -->
 
                 </div>
+
+                {% for m in messages %}
+                    <div class="alert alert-info text-center">
+                        <h4>{{ m }}</h4>
+                    </div>
+                {% endfor %}
 
                 <!-- *** NAVBAR END *** -->
 

@@ -1,6 +1,5 @@
 """Common settings and globals."""
-
-
+from django.core.urlresolvers import reverse
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -195,6 +194,8 @@ DJANGO_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'anymail',
+    'djcelery',
+    'django_extensions'
 )
 
 # Apps specific for this project go here.
@@ -268,6 +269,11 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
 ACCOUNT_LOGOUT_REDIRECT_URL = "products:home"
 ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.RegistrationForm'
+}
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'user:registration_login'
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = reverse('user:registration_login')
 ########## END ALLAUTH CONFIGURATION
 
 ########## MAILGUN CONFIGURATION
@@ -278,8 +284,19 @@ ANYMAIL = {
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  # or sendgrid.SendGridBackend, or...
 DEFAULT_FROM_EMAIL = "support@esmoke.ua"
 
-########## CITIES-LIGHT CONFIGURATION
-CITIES_LIGHT_TRANSLATION_LANGUAGES = ['ua', 'en', 'ru']
-CITIES_LIGHT_INCLUDE_COUNTRIES = ['UA']
-CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG', 'PPLL', 'PPLR', 'PPLS', 'STLMT',]
-########## END CITIES-LIGHT CONFIGURATION
+########## CELERY CONFIGURATION
+# INSTALLED_APPS += ('taskapp.celery.CeleryConfig',)
+INSTALLED_APPS += ('kombu.transport.django',)
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'pyamqp://guest:guest@localhost:5672/'
+CELERY_RESULT_BACKEND = "djcelery.backends.database:DatabaseBackend"
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = True
+########## END CELERY CONFIGURATION
+
+########## NOVA POSHTA CONFIGURATION
+NOVA_POSHTA_KEY = '3fa628f40ead7659f2b5d2b3a3b616cd'
+########## END NOVA POSHTA CONFIGURATION

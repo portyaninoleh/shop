@@ -10,6 +10,7 @@ from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
 from phonenumber_field.modelfields import PhoneNumberField
+from products.models import WareHouse
 
 class CustomUserManager(BaseUserManager):
 
@@ -58,6 +59,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     city = models.CharField(_('City'), max_length=255, null=True, blank=True)
     phone = PhoneNumberField(name=__('Phone'))
+    ware_houses = models.ManyToManyField(WareHouse)
+
 
     objects = CustomUserManager()
 
